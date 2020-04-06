@@ -43,18 +43,20 @@ mongoose.connect("mongodb://localhost/scraperLive", { useNewUrlParser: true });
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("https://liveforlivemusic.com").then(function(response) {
+  axios.get("https://www.guitarworld.com/news").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
-    // Now, we grab every h2 within an article tag, and do the following:
-    $("article").each(function(i, element) {
+    // Now, we grab every article within an article tag within the liveForLiveMusic website, and do the following:
+    $(".listingResult").each(function(i, element) {
       // Save an empty result object
       var result = {};
-
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(this)
         .children()           //var title = $(element).children().text();
+        .text();
+      result.synopsis = $(this)   //var synopsis = $(element).find(".synopsis").text();
+        .find(".synopsis")
         .text();
       result.link = $(this)   // var link = $(element).find("a").attr("href");
         .find("a")

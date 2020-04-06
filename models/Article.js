@@ -16,7 +16,14 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
-   // `img` is not required and of type String
+   
+  // `link` is required and of type String
+  synopsis: {
+    type: String,
+    required: true
+  },
+  
+  // `img` is not required and of type String
    img: {
     type: String,
   },
