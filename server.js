@@ -50,9 +50,10 @@ app.get("/scrape", function(req, res) {
   axios.get("https://www.guitarworld.com/news").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
-
+    //console.log(response.data)
     // Now, we grab every article within an article tag within the liveForLiveMusic website, and do the following:
     $(".listingResult").each(function(i, element) {
+    //  console.log(this)
       // Save an empty result object
       var result = {};
       // Add the text and href of every link, and save them as properties of the result object
@@ -69,17 +70,27 @@ app.get("/scrape", function(req, res) {
         .find("img")
         .attr("src");
 
+      db.Article.findOne({title: result.title}).then(function(data){
+        console.log(data)
+        if(data){
+          console.log("Already created")
+        } else if(data === null){
+          console.log("data is null")
+        } else {
+          // Create a new Article using the `result` object built from scraping
+          db.Article.create(result)
+          .then(function(dbArticle) {
+            // View the added result in the console
+            console.log(dbArticle);
+          })
+          .catch(function(err) {
+            // If an error occurred, log it
+            console.log(err);
+          });
+        }
+      })
 
-      // Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          // View the added result in the console
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          // If an error occurred, log it
-          console.log(err);
-        });
+      
     });
 
     // Send a message to the client
