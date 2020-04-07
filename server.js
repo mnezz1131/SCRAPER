@@ -34,13 +34,17 @@ app.engine(
       defaultLayout: "main"
     })
   );
+  app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/scraperLive", { useNewUrlParser: true });
 
 // Routes
-
-// A GET route for scraping the echoJS website
+// Main route (simple Hello World Message)
+app.get("/", function(req, res) {
+  res.render("index");
+});
+// A GET route for scraping the Guitar World website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
   axios.get("https://www.guitarworld.com/news").then(function(response) {
