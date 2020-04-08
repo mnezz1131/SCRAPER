@@ -7,7 +7,9 @@ $(document).ready(function() {
     $(document).on("click", ".btn.save", handleArticleSave);
     $(document).on("click", ".scrape-new", handleArticleScrape);
 
-    $(".clear").on("click", handleArticleClear);
+    $(".clear").on("click", handleArticleClear)=function(){
+      alert("button was clicked")
+    };
   
 
     function renderArticles(articles) {

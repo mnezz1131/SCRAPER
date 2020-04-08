@@ -22,7 +22,11 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  
+    // `link` is required and of type String
+    name: {
+      type: String,
+      required: true
+    },
   // `img` is not required and of type String
    img: {
     type: String,

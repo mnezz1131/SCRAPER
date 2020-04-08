@@ -44,10 +44,13 @@ mongoose.connect("mongodb://localhost/scraperLive", { useNewUrlParser: true });
 app.get("/", function(req, res) {
   res.render("index");
 });
+
+
+
 // A GET route for scraping the Guitar World website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
-  axios.get("https://www.guitarworld.com/news").then(function(response) {
+  axios.get("https://www.guitarworld.com/lessons").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
     //console.log(response.data)
@@ -60,7 +63,10 @@ app.get("/scrape", function(req, res) {
       result.title = $(this)
         .children()           //var title = $(element).children().text();
         .text();
-      result.synopsis = $(this)   //var synopsis = $(element).find(".synopsis").text();
+        result.name = $(this)   //var synopsis = $(element).find(".synopsis").text();
+        .find(".article-name")
+        .text(); 
+      result.synopsis = $(this)   //var name = $(element).find(".article-name").text();
         .find(".synopsis")
         .text();
       result.link = $(this)   // var link = $(element).find("a").attr("href");
@@ -68,16 +74,16 @@ app.get("/scrape", function(req, res) {
         .attr("href");
       result.img = $(this)   //var img = $(element).find('img').attr('src');
         .find("img")
-        .attr("src");
+        .attr("data-pin-media");
 
       db.Article.findOne({title: result.title}).then(function(data){
-        console.log(data)
+    //    console.log(data)
         if(data){
           console.log("Already created")
-        } else if(data === null){
-          console.log("data is null")
+       
         } else {
           // Create a new Article using the `result` object built from scraping
+          console.log(result);
           db.Article.create(result)
           .then(function(dbArticle) {
             // View the added result in the console

@@ -27,3 +27,8 @@ textarea {
   height: 200px;
   font-size: 18px;
 }
+
+img {
+  max-width: 35%;
+  height: auto;
+}
