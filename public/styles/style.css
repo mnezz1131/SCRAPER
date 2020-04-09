@@ -1,0 +1,161 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+.jumbotron {
+  position: relative;
+  width: 100%;
+  height: 360px;
+ /* font-family: 'Gotu', sans-serif;*/
+ /* font-family: 'IM Fell French Canon SC', serif;*/
+ /* font-family: 'Righteous', cursive;*/
+ /* font-family: 'Alegreya Sans SC', sans-serif;*/
+
+  padding: 0;
+  
+  box-shadow: 10px 5px 20px 2px lightslategrey;
+}
+
+.jumbotron h1 {
+  font-size: 80px;
+  font-weight: 800;
+  font-family: 'Spectral SC', serif;
+  text-shadow:
+   -1px -1px 0 rgb(252, 250, 250),  
+    1px -1px 0 rgb(255, 253, 253),
+    -1px 1px 0 rgb(250, 247, 247),
+     1px 1px 0 rgb(253, 251, 251);
+}
+
+.jumbotron p {
+  font-size: 50px;
+  font-style: italic;
+  color: rgb(247, 243, 243);
+ font-family: 'Alegreya Sans SC', sans-serif;
+  text-shadow:
+  -1px -1px 0 rgb(247, 6, 6),  
+    1px -1px 0 rgb(252, 5, 5),
+  -1px 1px 0 rgb(253, 7, 7),
+   1px 1px 0 rgb(253, 5, 5)
+}
+
+
+.jumbotron .overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: auto;
+  background: linear-gradient(rgb(247, 218, 218), rgb(1, 1, 1));
+  opacity: 0.7;
+}
+
+.jumbotron .caption {
+  position: absolute;
+  top: 8%;
+  width: 100%;
+  text-align: center;
+}
+
+
+.jumbotron .background-image {
+  height: 100%;
+  background-image: url(/images/gw4.jpg);
+  background-size: cover;
+
+
+}
+#wrapper {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+}
+#articles {
+  display: inline-block;
+  overflow: auto;
+  width: 60%;
+  height: 700px;
+}
+#notes {
+  float: right;
+  width: 30%;
+}
+textarea, input {
+  display: block;
+  width: 100%;
+  background-color: #FCF5C7;
+}
+input {
+  height: 36px;
+  font-size: 24px;
+}
+textarea {
+  height: 200px;
+  font-size: 18px;
+}
+
+img {
+  max-width: 35%;
+  height: auto;
+}
+ h6{
+   color: rgb(255, 0, 106);
+   font-style: italic;
+ }
+ .card {
+  border-radius: 0;
+  box-shadow: 3px 3px 20px lightslategrey;
+  margin: 20px 0;
+}
+
+
+
+
+ 
+.navbar-nav > li > a.scrape-new,
+.navbar-nav > li > a.clear, 
+.navbar-nav > li > a.get 
+{
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+  font-weight: 800;
+  color: white;
+}
+
+.navbar-nav > li > a.scrape-new:hover,
+.navbar-nav > li > a.clear:hover,
+.navbar-nav > li > a.get:hover
+ {
+  background: #4caf50;
+}
+
+.navbar-nav > li > a.scrape-new:active {
+  background: #e51c23;
+}
+
+.scrape-new {
+  cursor: pointer;
+}
+
+.m-top-80 {
+  margin-top: 80px;
+}
+
+textarea {
+  padding: 10px;
+  resize: none;
+  width: 100%;
+}
+
+.bootbox-body .btn {
+  float: right;
+  margin: 5px;
+}
+
+.note.list-group-item .btn {
+  position: relative;
+  bottom: 10px;
+}

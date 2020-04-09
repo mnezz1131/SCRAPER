@@ -10,18 +10,17 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/saved">Saved Articles</a>
+                     
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-danger clear">CLEAR ARTICLES!</a>
+                        <a class="btn btn-danger get">GET ARTICLES!</a>
+                    </li>
+                 
+                    <li class="nav-item">
+                        <a class="btn btn-danger clear"  onclick="reloadPage();">CLEAR ARTICLES!</a>
                     </li>
                 </ul>
             </div>
@@ -33,13 +32,13 @@
             <div class="background-image">
             </div>
             <div class="caption">
-                <h1>Guitar World Mongo News Scraper</h1>
-                <p>All The Guitar News That's Fit To Scrape!!</p>
+                <h1>Guitar World Mongo Lessons Scraper</h1>
+                <p>"Mongo only pawn in the game of life..."</p>
             </div>
         </div>
     </div>
 
-<div class="container-fluid">
+<div class="container-fluid article-container">
 
 
     <div id="articles"></div>
@@ -55,4 +54,5 @@
 
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script src="/app.js"></script>

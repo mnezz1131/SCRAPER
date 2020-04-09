@@ -1,6 +1,25 @@
 $(document).ready(function () {
   console.log("Ready")
-  $.getJSON("/articles", function (data) {
+ 
+  var articleContainer = $(".article-container");
+
+  // When user hits the scrape new articles-btn
+  $(".scrape-new").on("click", function (event) {
+    event.preventDefault();
+    console.log("Yeah! Buttons bitch!")
+    $.get("/scrape", function (data) {
+      console.log(data)
+      // bootbox.alert($("<h3 class='text-center m-top-80'>").text(data.message));
+    });
+
+  })
+
+
+  $(".get").on("click", function (event) {
+    event.preventDefault();
+    console.log("Yeah, buttons bitch!") 
+   
+      $.getJSON("/articles", function (data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
@@ -10,12 +29,29 @@ $(document).ready(function () {
       div.addClass("card")
       div.addClass("card-header")
       div.append("<h6>Click the on story title to leave a note!</h6>")
-      div.append("<h5 data-id='" + data[i]._id +"'>" + "Title : " + data[i].name + "<h5>")
+      div.append("<h5 data-id='" + data[i]._id + "'>" + "Title : " + data[i].name + "<h5>")
       div.append('<p data-id => <img src="' + data[i].img + '" />' + '<p>');
-      div.append('<p>Story Link : ' + "<a href=" + data[i].link + ">" + data[i].synopsis + '</a>' + '</p>'); 
+      div.append('<p>Story Link : ' + "<a href=" + data[i].link + ">" + data[i].synopsis + '</a>' + '</p>');
       $("#articles").append(div);
     }
   });
+
+});
+
+  // When user hits the scrape new articles-btn
+
+  $(".clear").on("click", function (event) {
+    event.preventDefault();
+    console.log("Yeah, buttons bitch!");
+    articleContainer.empty();
+    function reloadPage(){
+      location.reload(true);
+  }
+  reloadPage();
+  });
+
+
+
 
 
   // Whenever someone clicks a h5 tag
@@ -41,7 +77,7 @@ $(document).ready(function () {
         $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new note, with the id of the article saved to it
         $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
-        
+
         $("#notes").append("<button data-id='" + data._id + "' id='deletenote'>Delete Note</button>");
         //    If there's a note in the article
         if (data.note) {
@@ -91,7 +127,7 @@ $(document).ready(function () {
     //   // Run a DELETE request to DELETE the note, using what's entered in the inputs
     $.ajax({
         method: "DELETE",
-        url: "/articles/" + thisId,
+        url: "/delete/:id" + thisId,
         data: {
           // Value taken from title input
           title: $("#titleinput").val(),
@@ -111,8 +147,6 @@ $(document).ready(function () {
     $("#titleinput").val("");
     $("#bodyinput").val("");
   });
-
-
 
 
 
