@@ -41,12 +41,13 @@ module.exports = function (app) {
         result.date = $(this) // var date =$(element).find(".published-date").attr("data-published-date");
           .find(".published-date")
           .attr("data-published-date");
+         
 
         db.Article.findOne({
             title: result.title
           })
           .then(function (data) {
-            //console.log(data)
+         
             if (data) {
               console.log("Already created")
             } else {
@@ -63,13 +64,11 @@ module.exports = function (app) {
                 });
             }
           })
-
-
       });
-
       // Send a message to the client
       res.send("Scrape Complete");
     });
+ 
   });
 
   // Route for getting all Articles from the db
@@ -85,6 +84,23 @@ module.exports = function (app) {
         res.json(err);
       });
   });
+
+  // Route for getting all Notes from the db
+  app.get("/notes", function (req, res) {
+    // Grab every document in the Articles collection
+    db.Note.find({})
+      .then(function (dbNote) {
+        // If we were able to successfully find Articles, send them back to the client
+        res.json(dbNote);
+      })
+      .catch(function (err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+  });
+
+
+
 
   // Route for grabbing a specific Article by id, populate it with it's note
   app.get("/articles/:id", function (req, res) {
@@ -109,13 +125,14 @@ module.exports = function (app) {
     // Create a new note and pass the req.body to the entry
     db.Note.create(req.body)
       .then(function (dbNote) {
-        // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
-        // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
-        // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
+      // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
+      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
         return db.Article.findOneAndUpdate({
           _id: req.params.id
         }, {
-          note: dbNote._id
+          note: dbNote._id,
+       
         }, {
           new: true
         });
@@ -131,34 +148,8 @@ module.exports = function (app) {
   }); //app.post
 
 
-
-
-  // Retrieve results from notes DB
-  app.get("/all", function (req, res) {
-    // Find all notes in the notes collection
-    db.notes.find({}, function (error, found) {
-      // Log any errors
-      if (error) {
-        console.log(error);
-      } else {
-        // Otherwise, send json of the notes back to user
-        // This will fire off the success function of the ajax request
-        res.json(found);
-      }
-    });
-  });
-
-
-
-
-
-
-
-
-
-
   // Delete One from the DB
-  app.get("/delete/:id", function (req, res) {
+  app.delete("/articles/:id", function (req, res) {
     // Remove a note using the objectID
     db.Note.remove({
         _id: req.params.id

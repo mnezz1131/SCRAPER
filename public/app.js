@@ -7,11 +7,12 @@ $(document).ready(function () {
   $(".scrape-new").on("click", function (event) {
     event.preventDefault();
     console.log("Yeah! Buttons bitch!")
+ 
     $.get("/scrape", function (data) {
       console.log(data)
-      // bootbox.alert($("<h3 class='text-center m-top-80'>").text(data.message));
+   
     });
-
+    alert("Scrape Complete!")
   })
 
 
@@ -28,17 +29,17 @@ $(document).ready(function () {
       var div = $("<div>");
       div.addClass("card")
       div.addClass("card-header")
-      div.append("<h6>Click the on story title to leave a note!</h6>")
-      div.append("<h5 data-id='" + data[i]._id + "'>" + "Title : " + data[i].name + "<h5>")
+      div.append("<h5>Click the on story title to leave a note!</h5>")
+      div.append("<h4 data-id='" + data[i]._id + "'>" + "Title : " + data[i].name + "<h4>")
       div.append('<p data-id => <img src="' + data[i].img + '" />' + '<p>');
-      div.append('<p>Story Link : ' + "<a href=" + data[i].link + ">" + data[i].synopsis + '</a>' + '</p>');
+      div.append('<h5>Story Link : ' + "<a href=" + data[i].link + ">" + data[i].synopsis + '</a>' + '</h5>');
       $("#articles").append(div);
     }
   });
 
 });
 
-  // When user hits the scrape new articles-btn
+  // When user hits the clear articles-btn
 
   $(".clear").on("click", function (event) {
     event.preventDefault();
@@ -51,11 +52,8 @@ $(document).ready(function () {
   });
 
 
-
-
-
-  // Whenever someone clicks a h5 tag
-  $(document).on("click", "h5", function () {
+  // Whenever someone clicks a h4 tag
+  $(document).on("click", "h4", function () {
     // Empty the notes from the note section
     $("#notes").empty();
     // Save the id from the h5 tag
@@ -77,8 +75,8 @@ $(document).ready(function () {
         $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new note, with the id of the article saved to it
         $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
-
-        $("#notes").append("<button data-id='" + data._id + "' id='deletenote'>Delete Note</button>");
+        // A button to submit a new note, with the id of the article saved to it
+        $("#notes").append("<button data-id='" + data.note._id + "' id='deletenote'>Delete Note</button>");
         //    If there's a note in the article
         if (data.note) {
           // Place the title of the note in the title input
@@ -86,6 +84,7 @@ $(document).ready(function () {
           // Place the body of the note in the body textarea
           $("#bodyinput").val(data.note.body);
         }
+      
       });
   });
 
@@ -127,13 +126,8 @@ $(document).ready(function () {
     //   // Run a DELETE request to DELETE the note, using what's entered in the inputs
     $.ajax({
         method: "DELETE",
-        url: "/delete/:id" + thisId,
-        data: {
-          // Value taken from title input
-          title: $("#titleinput").val(),
-          // Value taken from note textarea
-          body: $("#bodyinput").val(),
-        }
+        url: "/articles/" + thisId,
+     
       })
       //    With that done
       .then(function (data) {
@@ -142,16 +136,12 @@ $(document).ready(function () {
         // Empty the notes section
         $("#notes").empty();
       });
-
-    // Also, remove the values entered in the input and textarea for note entry
-    $("#titleinput").val("");
-    $("#bodyinput").val("");
   });
 
 
 
 
-
+ 
 
 
 });
