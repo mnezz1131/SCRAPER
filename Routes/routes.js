@@ -132,7 +132,7 @@ module.exports = function (app) {
           _id: req.params.id
         }, {
           note: dbNote._id,
-       
+      
         }, {
           new: true
         });
@@ -153,6 +153,9 @@ module.exports = function (app) {
     // Remove a note using the objectID
     db.Note.remove({
         _id: req.params.id
+      },{
+        note: dbNote._id,
+    
       },
       function (error, removed) {
         // Log any errors from mongojs
