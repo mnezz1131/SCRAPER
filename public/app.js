@@ -29,8 +29,8 @@ $(document).ready(function () {
       var div = $("<div>");
       div.addClass("card")
       div.addClass("card-header")
-      div.append("<h5>Click the on story title to leave a note!</h5>")
-      div.append("<h4 data-id='" + data[i]._id + "'>" + "Title : " + data[i].name + "<h4>")
+      div.append("<h3>Click the on story title to leave a note!</h3>")
+      div.append("<h2 data-id='" + data[i]._id + "'>" + "Title : " + data[i].name + "<h2>")
       div.append('<p data-id => <img src="' + data[i].img + '" />' + '<p>');
       div.append('<h5>Story Link : ' + "<a href=" + data[i].link + ">" + data[i].synopsis + '</a>' + '</h5>');
       $("#articles").append(div);
@@ -53,7 +53,7 @@ $(document).ready(function () {
 
 
   // Whenever someone clicks a h4 tag
-  $(document).on("click", "h4", function () {
+  $(document).on("click", "h2", function () {
     // Empty the notes from the note section
     $("#notes").empty();
     // Save the id from the h5 tag
