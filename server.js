@@ -39,6 +39,14 @@ app.engine(
 // Routes
   require("./Routes/routes")(app);
   require("./Routes/htmlRoutes")(app);
+
+    // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+  var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+  
+  mongoose.connect(MONGODB_URI);
+  
+
+
   // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/scraperLive", { useNewUrlParser: true });
 
