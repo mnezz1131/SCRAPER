@@ -1,6 +1,18 @@
 # SCRAPER
-SCRAPER HOMEWORK
-The assignment was to make a "newscraper" based on a homework assignment and referenced in the Mongo News Scraper link.  I searched a couple of news sources for a good scraping platform and all the news is so goddamn depressing I just couldn't do it.  So I went to back to my default of music. However the music sites I get news from didn't have all that much music news so I went to guitars. Scraping the news on Guitar World and the Lessons was more or less the same process so I went with the lessons as something I would actually use after this class.  It made the assignment much more enjoyable for me also.  This assignment is  no where near where I want it to be, but alas I am out of time and cannot afford to fall behind on the upcoming assigments trying to perfect this.  I spent  many hours on this assignment but once again my ambitions far exceed my abilitites.
+SCRAPER is an app that was designed so that users can "scrape" the Guitar World website for guitar lessons.  They can also leave notes on the lessons or advice.
+![Image of Giftastic](https://i.imgur.com/b00XxWA.png?1)
+
+## Tech/Framework Used
+* HTML5
+* CSS3 
+* Javascript 
+* Handelbars
+* Express
+* Express-handlebars
+* Mongoose
+* Cheerio
+* Axios
+* Heroku
 
 To use this website.
 Scrape for new articles, or lessons as is were.
@@ -8,3 +20,6 @@ Get the articles.
 Links are provided to the lessons.
 You can click on the Title to leave a note.
 You can click on the Title again bring up the saved note and delete it if you wish.
+
+## Website Link
+https://ancient-gorge-78749.herokuapp.com/
